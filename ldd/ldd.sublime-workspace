@@ -1,0 +1,325 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"set",
+				"set_value"
+			],
+			[
+				"D",
+				"DIR_INPUT"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "#include <linux/module.h>\n#include <linux/init.h>\n\n\n#include <linux/leds.h>\n#include <linux/kernel.h>\n#include <linux/platform_device.h>\n#include <asm/gpio.h>\n\nMODULE_AUTHOR(\"ChunYu Guan <guanchunyu123@126.com>\");\nMODULE_DESCRIPTION(\"ldd bus add\");\nMODULE_LICENSE(\"GPL\");\n\n\n\n\nstatic ssize_t show_myfun(struct bus_type *bus, char *buf)\n{\n\tprintk(KERN_INFO \"I am in show_myfun\\n\");\n\treturn 0;\n}\n\n\nstatic ssize_t store_myfun(struct bus_type *bus,\n\t\t\t\t       const char *buf, size_t count)\n{\n\tprintk(KERN_INFO \"I am in store_myfun\\n\");\n\treturn 0;\n}\n\n\nstatic BUS_ATTR(myattr, S_IWUSR | S_IRUGO, show_myfun, store_myfun);\n\n\nstruct device ldd_bus = {\n\t.init_name = \"ldd\",\n\t\n};\n\nstruct bus_type ldd_bus_type = {\n\t.name = \"ldd_bus\",\n\t.bus_attrs = &bus_attr_myattr,\n\t//.match = ldd_match,\n};\n\nstatic int __init ldd_bus_init(void)\n{\n\tint error = 0;\n\n\terror = device_register(&ldd_bus);    /* 在/sys/devices目录下创建一个设备目录，设备有一个属性uevent */\n\tif(error)\n\t\treturn error;\n\n\terror = bus_register(&ldd_bus_type);\t\t/* 在/sys/bus目录下创建一个总线目录 */\n\tif(error)\n\t\tbus_unregister(&ldd_bus_type);\n\t\n\tprintk(KERN_INFO \"error = %d\\n\", error);\t\n\n\treturn error;\n}\n\n\nstatic void __exit ldd_bus_exit(void)\n{\n\tbus_unregister(&ldd_bus_type);\n\tdevice_unregister(&ldd_bus);\n}\n\nmodule_init(ldd_bus_init);\nmodule_exit(ldd_bus_exit);\n\n",
+			"file": "/X/atmel-test/drivers/bus/ldd_bus.c",
+			"file_size": 1414,
+			"file_write_time": 131589182483042257,
+			"settings":
+			{
+				"buffer_size": 1286,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/X/atmel-test/drivers/bus/ldd_bus.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"INSTA",
+				"Package Control: Install Package"
+			],
+			[
+				"install package",
+				"Package Control: Install Package"
+			],
+			[
+				"chin",
+				"ConvertToUTF8: Reload with Encoding"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/X/atmel-test/drivers/bus"
+	],
+	"file_history":
+	[
+		"/X/atmel-test/application/canapp/can.c",
+		"/X/atmel-test/application/canapp/can.h",
+		"/X/atmel-test/drivers/bus/Makefile",
+		"/X/atmel-test/drivers/bus/ldd_bus.c",
+		"/X/atmel-test/drivers/bus/ldd_bus.mod.c",
+		"/X/atmel-test/drivers/bus/.ldd_bus.o.cmd",
+		"/X/atmel-test/drivers/bus/ldd.c",
+		"/X/atmel-test/application/canapp/Makefile",
+		"/X/drivers/1-wire/ds18b20_stm32/ds18b20.c",
+		"/X/drivers/1-wire/ds18b20_stm32/test.c",
+		"/X/drivers/1-wire/ds18b20_stm32/ds18b20.h",
+		"/X/drivers/1-wire/ds18b20_s3c2440/devs.h",
+		"/X/drivers/1-wire/ds18b20_s3c2440/devs.c",
+		"/X/drivers/1-wire/ds18b20_s3c2440/ds18b20.c",
+		"/X/drivers/1-wire/ds18b20/ds18b20.h",
+		"/X/drivers/1-wire/ds18b20/test.c",
+		"/X/drivers/1-wire/ds18b20/ds18b20.c",
+		"/X/drivers/1-wire/ds18b20/test.c.dump",
+		"/X/drivers/1-wire/ds18b20/ds18b20.h.dump",
+		"/X/drivers/1-wire/ds18b20/ds18b20.c.dump",
+		"/X/module_test/Adc/adc.c",
+		"/X/module_test/Adc/Makefile",
+		"/X/module_test/Adc/sublime/adc.sublime-project",
+		"/X/module_test/Fan_Driver/fan_driver.h",
+		"/X/module_test/Fan_Driver/fan_driver_lib.c",
+		"/X/module_test/Fan_Driver/fan_driver.c",
+		"/X/application/gpio/gpio_example.c",
+		"/X/application/gpio/gpiolib.c",
+		"/X/application/gpio/gpiolib.h",
+		"/X/module_test/Fan_Driver/Makefile",
+		"/X/application/gpio/Makefile",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/14-I2C/main.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/14-I2C/common/include/exynos_4412.h",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/09-ADC/main.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/09-ADC/common/include/exynos_4412.h",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/05-Ket_Int/main.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/05-Ket_Int/common/include/stdarg.h",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/05-Ket_Int/start/start.S",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/05-Ket_Int/common/src/printf.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/05-Ket_Int/common/src/uart.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/10-UART/main.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/10-UART/common/include/exynos_4412.h",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/10-UART/common/src/printf.c",
+		"/E/学习资料/4412开发板资料/实验代码/1、ARM体系结构与接口技术/实验代码/10-UART/start/start.S"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"filter",
+			"can_filter",
+			"can_read",
+			"can_show_header",
+			"srr",
+			"s3c_device_ds18b20_dmamask",
+			"DS18B20_Init",
+			"STATE_NOINIT",
+			"get_gpio_input",
+			"FAIL",
+			"I2CADD"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/X/atmel-test/drivers/bus/ldd_bus.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1286,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								515,
+								526
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 207.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/X/atmel-test/drivers/bus/ldd_bus.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "ldd.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 172.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
